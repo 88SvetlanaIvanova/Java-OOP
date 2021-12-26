@@ -1,0 +1,78 @@
+package garage;
+
+
+import org.junit.Assert;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class GarageTests {
+   @Test(expected = IllegalArgumentException.class)
+   public void testaddFail(){
+      Garage garage = new Garage();
+
+      Car car = null;
+      garage.addCar(car);
+
+   }
+   @Test
+   public void testFindSpeedAbove(){
+      Garage garage = new Garage();
+      Car car1 = new Car("Maz", 500, 200);
+      garage.addCar(car1);
+      Car car2 = new Car("MR", 100, 200);
+      Car car3 = new Car("MO", 200, 200);
+      garage.addCar(car2);
+      garage.addCar(car3);
+
+
+      Assert.assertTrue(garage.findAllCarsWithMaxSpeedAbove(250).contains(car1));
+   }
+   @Test
+   public void getMostExpensiveCar(){
+      Garage garage = new Garage();
+      Car car1 = new Car("Maz", 500, 20);
+      garage.addCar(car1);
+      Car car2 = new Car("MR", 100, 29);
+      Car car3 = new Car("MO", 200, 200);
+      garage.addCar(car2);
+      garage.addCar(car3);
+
+      Assert.assertFalse( garage.getTheMostExpensiveCar().equals(car1));
+   }
+   @Test
+   public void findAllCarsByBrandCheck(){
+      Garage garage = new Garage();
+      Car car1 = new Car("Maz", 500, 20);
+      garage.addCar(car1);
+      Car car2 = new Car("MR", 100, 29);
+      Car car3 = new Car("MO", 200, 200);
+      garage.addCar(car2);
+      garage.addCar(car3);
+
+      Assert.assertTrue( garage.findAllCarsByBrand("MR").contains(car2));
+   }
+   @Test
+   public void testCount() {
+      Garage garage = new Garage();
+      Car car1 = new Car("Maz", 500, 20);
+      garage.addCar(car1);
+      Car car2 = new Car("MR", 100, 29);
+      Car car3 = new Car("MO", 200, 200);
+      garage.addCar(car2);
+      garage.addCar(car3);
+      Assert.assertTrue(garage.getCount()==3);
+   }
+   @Test(expected = UnsupportedOperationException.class)
+   public void testGetCarsUnmodif() {
+      Garage garage = new Garage();
+      Car car1 = new Car("Maz", 500, 20);
+      garage.addCar(car1);
+      Car car2 = new Car("MR", 100, 29);
+      Car car3 = new Car("MO", 200, 200);
+      garage.addCar(car2);
+      garage.addCar(car3);
+      Car car4 = new Car("UUO", 500, 200);
+      garage.getCars().add(car4);
+   }
+
+}
